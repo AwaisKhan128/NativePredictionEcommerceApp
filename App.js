@@ -4,6 +4,8 @@ import AppLoading from 'expo-app-loading';
 import Navigation from './Navigator';
 import { Provider } from 'react-redux';
 import store from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from './store';
 // custom fonts
 const fontsData = {
   Nunito: require('./assets/font/Inter-Regular.ttf'),
@@ -19,7 +21,9 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <Navigation />
+      <PersistGate loading={null} persistor={persistor}>
+        <Navigation />
+      </PersistGate>
     </Provider>
   );
 }

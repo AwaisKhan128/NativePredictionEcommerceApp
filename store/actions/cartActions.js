@@ -41,3 +41,14 @@ export const removeItemFromCart = (dispatch, productId, cartList) => {
   const newList = cartList.filter((item) => productId !== item.id);
   dispatch({ type: REMOVE_ITEM_CART, payload: newList });
 };
+
+
+export const addReveiw = (newReview, id) => {
+  return {
+    type: "SET_REVIEW",
+    payload: {
+      newReview,
+      id
+    }
+  }
+}

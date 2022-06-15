@@ -1,31 +1,45 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ImageBackground } from 'react-native-web';
+import { StyleSheet, Text, View, Image,Dimensions } from 'react-native';
 import COLORS from '../../constants/COLORS';
 import { getTag } from '../../utilities/tag';
 import UiButton from '../UI/Button';
 import UiText from '../UI/Text';
+import { AntDesign } from '@expo/vector-icons';
 
-const Reviews = (data) => {
-  const { title, description, image } = data;
-  console.log("Data included",data)
+const Reviews = ({ data }) => {
+  const { isPositive, name, review, image, rating } = data;
 
   return (
-        <View style={Styles.container}>
+    <View style={Styles.container}>
+      <View style={{ marginRight: 10 }}>
+        <View style={{ height: 50, width: 50, borderRadius: 100, overflow: "hidden" }}>
+          <Image style={{ flex: 1, height: undefined, width: undefined, borderRadius: 100, overflow: "hidden" }} resizeMode="contain" source={{ uri: image }} />
+        </View>
+      </View>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 2 }}>
           <View>
-            <ImageBackground
-              source={{
-                uri: `${image}`,
-              }}
-              resizeMode="center"
-              style={Styles.productImage}
-            />
+            <UiText style={{ fontFamily: "Nunito-Bold" }}>
+              {name}
+            </UiText>
           </View>
           <View>
-            <UiText style={Styles.head}>{title}</UiText>
-            <UiText style={Styles.descriptionText}>{description}</UiText>
+            <UiText>
+              {review}
+            </UiText>
           </View>
         </View>
+      </View>
+      <View style={{ marginLeft:10, alignSelf:"center", paddingHorizontal: 10, height: 50, width: 100, backgroundColor: isPositive ? "rgba(50,205,50,0.8)" : "rgba(255,0,0,0.8)", borderRadius: 10, alignItems: "center", justifyContent: "center" }}>
+        <UiText style={{ color: "white", textAlign: "center" }}>
+          {`${isPositive ? "Positive" : "Negative"}`}
+        </UiText>
+        <UiText style={{ color: "white", textAlign: "center" }}>
+          {`${rating} %`}
+        </UiText>
+      </View>
+
+    </View>
   );
 };
 
@@ -34,13 +48,12 @@ const Reviews = (data) => {
 //     <UiText style={Styles.descriptionText}>{data.description}</UiText>
 //   </View>
 const Styles = StyleSheet.create({
-  container: {},
+  container: { flex: 1, flexDirection: "row", borderBottomWidth: 0.5, borderBottomColor: "#eee", marginBottom: 5, paddingBottom: 5 },
   productInfo: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-
   title: {
     fontSize: 18,
     fontFamily: 'Nunito-Bold',

@@ -13,7 +13,7 @@ import UiIconButton from '../components/UI/IconButton';
 const ProductDetail = ({ navigation }) => {
   const [isFavItem, setIsFavItem] = useState(false);
   const productData = navigation.getParam('productData');
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items)
   const dispatch = useDispatch();
 
   function toggleFavHandler() {
@@ -35,10 +35,6 @@ const ProductDetail = ({ navigation }) => {
           style={Styles.productImage}
         />
       </View>
-
-
-
-      
       <View style={Styles.infoView}>
         <UiView style={Styles.container}>
           <ProductInfoBlock data={productData} />
@@ -93,7 +89,7 @@ const Styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: 10,
+    bottom: 80,
     right: 10,
     alignSelf: 'center',
     padding: 15,

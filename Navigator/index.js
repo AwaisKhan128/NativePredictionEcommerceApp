@@ -6,6 +6,8 @@ import { createAppContainer } from 'react-navigation';
 import { ProductStackNavigator } from './ProductNavigator';
 import Profile from '../screens/Profile';
 import { CartStackNavigator } from './CartNavigator';
+import { createStackNavigator } from 'react-navigation-stack';
+import Signin from '../screens/SingIn';
 
 const tabScreensConfig = {
   Products: {
@@ -34,12 +36,23 @@ const tabScreensConfig = {
   },
 };
 
-const AppTabNavigation = createMaterialBottomTabNavigator(tabScreensConfig, {
+const bottomTab = createMaterialBottomTabNavigator(tabScreensConfig, {
   activeColor: COLORS.primaryColor,
   shifting: true,
   barStyle: {
     backgroundColor: '#fff',
   },
 });
+const AppNavigation = createStackNavigator(
+  {
+    Signin: Signin,
+    BottomTab: bottomTab
+  }, {
+  initialRouteName: "Signin",
+  headerMode: false
+}
+)
 
-export default createAppContainer(AppTabNavigation);
+// const AppTabNavigation = 
+
+export default createAppContainer(AppNavigation);
